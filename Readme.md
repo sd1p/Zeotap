@@ -1,51 +1,22 @@
-Frontend Deployment - <https://zeotap-app.vercel.app/>
-
-Task 1 Backend Docs - <https://task1-backend-283967249469.asia-south1.run.app/docs>
-
-Task 2 Backend  Docs - <https://task2-backend-283967249469.asia-south1.run.app/docs>
 
 # Rule Engine with AST and Real-Time Weather Monitoring System
 
-## Table of Contents
+## Deployment
 
-- [Rule Engine with AST and Real-Time Weather Monitoring System](#rule-engine-with-ast-and-real-time-weather-monitoring-system)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Applications](#applications)
-    - [Rule Engine with AST](#rule-engine-with-ast)
-      - [Objective](#objective)
-      - [Data Structure](#data-structure)
-      - [Sample Rules](#sample-rules)
-    - [Real-Time Data Processing System for Weather Monitoring](#real-time-data-processing-system-for-weather-monitoring)
-      - [Objective](#objective-1)
-      - [Data Source](#data-source)
-    - [Real-Time Data Processing System for Weather Monitoring](#real-time-data-processing-system-for-weather-monitoring-1)
-      - [Objective](#objective-2)
-      - [Data Source](#data-source-1)
-      - [Rollups and Aggregates](#rollups-and-aggregates)
-  - [Build Instructions](#build-instructions)
-    - [Task 1: Rule Engine with AST](#task-1-rule-engine-with-ast)
-    - [Task 2: Real-Time Data Processing System for Weather Monitoring](#task-2-real-time-data-processing-system-for-weather-monitoring)
-  - [Dependencies](#dependencies)
-  - [API Endpoints](#api-endpoints)
-    - [Rule Engine](#rule-engine)
-    - [Weather Monitoring](#weather-monitoring)
-  - [Database Schema](#database-schema)
-    - [Rule Engine](#rule-engine-1)
-    - [Weather Monitoring](#weather-monitoring-1)
-  - [Test Cases](#test-cases)
-    - [Rule Engine](#rule-engine-2)
-    - [Weather Monitoring](#weather-monitoring-2)
-  - [Design Choices](#design-choices)
-  - [Additional Features](#additional-features)
-  - [Conclusion](#conclusion)
+- **Frontend Deployment**: [zeotap-app.vercel.app](https://zeotap-app.vercel.app/)
+- **Task 1 Backend Docs**: [Task 1 API Documentation](https://task1-backend-283967249469.asia-south1.run.app/docs)
+- **Task 2 Backend Docs**: [Task 2 API Documentation](https://task2-backend-283967249469.asia-south1.run.app/docs)
+
+---
 
 ## Introduction
 
 This project consists of two main applications:
 
-1. A Rule Engine with Abstract Syntax Tree (AST) for determining user eligibility based on attributes.
-2. A Real-Time Data Processing System for Weather Monitoring with rollups and aggregates.
+1. **Rule Engine with Abstract Syntax Tree (AST)** for determining user eligibility based on attributes.
+2. **Real-Time Data Processing System for Weather Monitoring** with rollups and aggregates.
+
+---
 
 ## Applications
 
@@ -59,26 +30,30 @@ Develop a 3-tier rule engine application to determine user eligibility based on 
 
 The AST is represented using a Node data structure with the following fields:
 
-- `type`: String indicating the node type ("operator" for AND/OR, "operand" for conditions)
-- `left`: Reference to another Node (left child)
-- `right`: Reference to another Node (right child for operators)
-- `value`: Optional value for operand nodes (e.g., number for comparisons)
+- `type`: String indicating the node type (e.g., "operator" for AND/OR, "operand" for conditions).
+- `left`: Reference to another Node (left child).
+- `right`: Reference to another Node (right child for operators).
+- `value`: Optional value for operand nodes (e.g., number for comparisons).
 
 #### Sample Rules
 
-- `rule1 = "((age > 30 AND department = 'Sales') OR (age < 25 AND department = 'Marketing')) AND (salary > 50000 OR experience > 5)"`
+- `rule1`: `"((age > 30 AND department = 'Sales') OR (age < 25 AND department = 'Marketing')) AND (salary > 50000 OR experience > 5)"`
+- `rule2`: `"((age > 30 AND department = 'Marketing')) AND (salary > 20000 OR experience > 5)"`
 
-- `rule2 = "((age > 30 AND department = 'Marketing')) AND (salary > 20000 OR experience > 5)"`
+#### Technologies Used
 
-### Real-Time Data Processing System for Weather Monitoring
+- **Backend**: FastAPI for high-performance API development.
+- **Frontend**: React for an interactive user interface.
 
-#### Objective
+#### Design Choices
 
-Develop a real-time data processing system to monitor weather conditions and provide summarized insights using rollups and aggregates. The system retrieves data from the OpenWeatherMap API.
+- Core logic is implemted in python for simplicity and performance.
+- Client server architecture is used to for simpler build and deployment.
+- Node Class is used to represent the AST. This allows for easy manipulation and evaluation of the rules.
+- The AST is created by parsing the input string using a recursive descent parser.
+- The AST is evaluated using a recursive function that traverses the tree and evaluates the conditions.
 
-#### Data Source
-
-The system continuously retrieves weather data from the OpenWeatherMap API for metros in India (Delhi, Mumbai, Chennai, Bangalore, Kolkata, Hyderabad).
+---
 
 ### Real-Time Data Processing System for Weather Monitoring
 
@@ -95,11 +70,26 @@ The system continuously retrieves weather data from the OpenWeatherMap API for m
 1. **Daily Weather Summary**:
    - Calculate daily aggregates for average temperature, maximum temperature, minimum temperature, and dominant weather condition.
    - Store daily summaries in a database.
-   - Cron jobs are used for the retrieval of weather data and aggregation at midnight.
+   - Cron jobs retrieve weather data and perform aggregation at midnight.
 
 2. **Alerting Thresholds**:
    - Define user-configurable thresholds for temperature or specific weather conditions.
    - Trigger alerts if thresholds are breached.
+
+#### Technologies Used
+
+- **Backend**: FastAPI for high-performance API development.
+- **Frontend**: React for an interactive user interface.
+
+#### Design Choices
+
+- Fast API is used for simplicity.
+- Cronjobs are used to fetch weather data and calculate daily summaries.
+- Fetching weather data is done using the OpenWeatherMap API every 5 minutes.
+- Daily summaries are calculated at midnight (24h) and stored in the database.
+- Alerts are triggered when the current weather data breaches temperature thresholds.
+
+---
 
 ## Build Instructions
 
@@ -123,7 +113,7 @@ The system continuously retrieves weather data from the OpenWeatherMap API for m
 3. Run the backend server:
 
     ```sh
-    uvicorn main:app --reload
+    uvicorn main:app --reload --port 8000
     ```
 
 4. Run the tests:
@@ -152,58 +142,78 @@ The system continuously retrieves weather data from the OpenWeatherMap API for m
 3. Run the backend server:
 
     ```sh
-    uvicorn main:app --reload
+    uvicorn main:app --reload  --port 8080
     ```
 
-4. Set up the frontend:
+### Set up the frontend
 
-        ```sh
-        cd frontend
-        npm install
-        ```
+1. Install the dependencies:
 
-5. Run the frontend server:
+    ```sh
+    cd frontend
+    npm install
+    ```
+
+2. Set up the environment variables:
+
+   - Create a `.env.local` file in the `frontend` directory.
+   - Add the following environment variables:
+
+     ```env
+     NEXT_PUBLIC_Task1_API=http://localhost:8000
+     NEXT_PUBLIC_Task2_API=http://localhost:8080
+     ```
+
+3. Run the frontend server:
 
     ```sh
     npm run dev
     ```
 
+---
+
 ## Dependencies
 
-- **Backend**:
-  - Python 3.8+
-  - FastAPI
-  - SQLAlchemy
-  - Uvicorn
-  - Pydantic
-  - OpenWeatherMap API Key
+### Backend
 
-- **Frontend**:
-  - Node.js 14+
-  - React
-  - Next.js
-  - Axios
+- Python
+- FastAPI
+- SQLAlchemy
+- Uvicorn
+- Pydantic
+- OpenWeatherMap API Key
+
+### Frontend
+
+- Node.js 20+
+- React
+- Next.js 14
+- Axios
+
+---
 
 ## API Endpoints
 
 ### Rule Engine
 
+- **Documentation**: [Task 1 API Documentation](https://task1-backend-283967249469.asia-south1.run.app/docs)
 - `POST /api/create_rule`: Create a rule and return its AST.
 - `POST /api/combine_rules`: Combine multiple rules into a single AST.
 - `POST /api/evaluate_rule`: Evaluate a rule against provided data.
 
 ### Weather Monitoring
 
-- `GET /api/weather/daily_summary/{location}`: Get daily weather summary for a location.
+- **Documentation**: [Task 2 API Documentation](https://task2-backend-283967249469.asia-south1.run.app/docs)
+- `GET /api/weather/current/{city}`: Get current weather data for a city.
+- `GET /api/weather/daily_summary/{city}`: Get daily weather summary for a city.
+- `POST /api/alerts`: Create a new weather alert.
+- `GET /api/alerts/{city}`: Get all alerts for a city.
+- `GET /api/weather/fetch`: Trigger weather data fetch and store operation.
+- `GET /api/weather/calculate_summary`: Trigger calculation of today's weather summary.
+
+---
 
 ## Database Schema
-
-### Rule Engine
-
-- `rules`:
-  - `id`: Integer, Primary Key
-  - `rule_string`: String
-  - `ast`: JSON
 
 ### Weather Monitoring
 
@@ -216,13 +226,49 @@ The system continuously retrieves weather data from the OpenWeatherMap API for m
   - `min_temp`: Float
   - `dominant_condition`: String
 
+- `alerts`:
+  - `id`: Integer, Primary Key, Auto Increment
+  - `city`: String, Not Null
+  - `condition`: String, Not Null
+  - `threshold`: Float, Not Null
+  - `current_value`: Float, Not Null
+  - `timestamp`: DateTime, Not Null
+  - `user_email`: String, Nullable
+
+- `user_alerts`:
+  - `id`: Integer, Primary Key, Auto Increment
+  - `user_email`: String, Nullable
+  - `city`: String, Not Null
+  - `temperature_above`: Boolean, Not Null
+  - `temperature_threshold`: Float, Nullable
+  - `active`: Boolean, Default True
+
+- `weather_data`:
+  - `id`: Integer, Primary Key, Auto Increment
+  - `city`: String, Not Null
+  - `main`: String, Not Null
+  - `temp`: Float, Not Null
+  - `feels_like`: Float, Not Null
+  - `humidity`: Float, Not Null
+  - `dt`: Integer, Not Null
+
+---
+
 ## Test Cases
 
 ### Rule Engine
 
-1. Create individual rules using `create_rule` and verify their AST representation.
-2. Combine rules using `combine_rules` and ensure the resulting AST reflects the combined logic.
-3. Test `evaluate_rule` with sample JSON data for different scenarios.
+1. **Create individual rules using `create_rule`**:
+   - **Test**: `test_create_rule`
+   - **Description**: Verifies that `create_rule` correctly parses a rule string into its AST representation.
+
+2. **Combine rules using `combine_rules`**:
+   - **Test**: `test_combine_rules`
+   - **Description**: Verifies that `combine_rules` correctly combines multiple rule strings into a single AST.
+
+3. **Evaluate rule using `evaluate_rule`**:
+   - **Test**: `test_evaluate_rule`
+   - **Description**: Verifies that `evaluate_rule` correctly evaluates an AST against provided context data.
 
 ### Weather Monitoring
 
@@ -230,20 +276,3 @@ The system continuously retrieves weather data from the OpenWeatherMap API for m
 2. Simulate API calls and ensure correct data retrieval and parsing.
 3. Test temperature conversion from Kelvin to Celsius.
 4. Verify daily summaries and alerting thresholds.
-
-## Design Choices
-
-- **Rule Engine**: Used AST for flexible and dynamic rule representation. Chose FastAPI for its performance and ease of use.
-- **Weather Monitoring**: Used OpenWeatherMap API for reliable weather data. Chose Next.js for server-side rendering and React for the frontend.
-
-## Additional Features
-
-- Error handling for invalid rule strings or data formats.
-- Validations for attributes to be part of a catalog.
-- Modification of existing rules.
-- User-defined functions within the rule language for advanced conditions.
-- Support for additional weather parameters and forecasts.
-
-## Conclusion
-
-This project demonstrates a comprehensive approach to building a rule engine with AST and a real-time weather monitoring system. The design choices and implementation details ensure flexibility, scalability, and maintainability.

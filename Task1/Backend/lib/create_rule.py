@@ -97,24 +97,6 @@ class RuleParser:
         self.pos += 1
 
 
-#TODO: Error handling on the rule 
-# 1. Implement Error Handling for Invalid Rule Strings or Data Formats
-# Error handling ensures that your application can gracefully handle unexpected inputs without crashing. Here are some key components to consider:
-
-# a. Identify Common Errors:
-# Missing Operators: Rules should have operators (like AND, OR, >, <, =) between operands. For example, the rule "age 30" is invalid because it lacks a comparison operator.
-# Invalid Comparisons: Comparisons should be made between compatible types (e.g., comparing a string to a number is invalid).
-# Unmatched Parentheses: Rules containing parentheses must be balanced. An expression like "(age > 30 AND department = 'Marketing'" is invalid due to a missing closing parenthesis.
-
-# b. Implementing Error Handling:
-# Try-Except Blocks: Wrap critical sections of code (like parsing and evaluation) in try-except blocks to catch exceptions and provide user-friendly error messages.
-# Custom Exceptions: Create custom exception classes to differentiate between various error types (e.g., MissingOperatorError, InvalidComparisonError, UnmatchedParenthesesError).
-# Error Messages: Provide meaningful error messages that explain the problem, indicating the location and nature of the error. For example, "Error: Missing operator between operands at position 3."
-
-# c. Validation during Tokenization and Parsing:
-# In the tokenize function, check for invalid patterns and raise exceptions as needed.
-# In the Parser class, implement checks to ensure that operators are correctly placed and operands are valid.
-
 
 
 
