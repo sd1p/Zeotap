@@ -20,7 +20,7 @@ class EvaluateRuleRequest(BaseModel):
 def create_rule_endpoint(request: RuleRequest):
     try:
         rule_ast = create_rule(request.rule_string)
-        return {"Node": rule_ast}
+        return  rule_ast
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -28,7 +28,7 @@ def create_rule_endpoint(request: RuleRequest):
 def combine_rules_endpoint(request: CombineRulesRequest):
     try:
         combined_ast = combine_rules(request.rules)
-        return {"ast": combined_ast}
+        return combined_ast
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

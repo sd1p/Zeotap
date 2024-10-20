@@ -5,7 +5,7 @@ def create_rule(rule: str):
     try:
         parser = RuleParser(rule)
         ast = parser.parse()
-        return ast.to_dict()
+        return {"Node":ast.to_dict()}
     
     except ValueError as ve:
         return {"error": str(ve)}
