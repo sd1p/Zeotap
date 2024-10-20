@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import AddTrigger from "./AddTRigger"; // Import the new AddTrigger component
+import AddTrigger from "./AddTRigger";
 import config from "@/lib/config";
 
 interface Trigger {
@@ -16,7 +16,7 @@ interface Trigger {
 }
 
 interface TriggersProps {
-  location: string; // location to fetch alerts
+  location: string;
 }
 
 const Triggers = ({ location }: TriggersProps) => {
@@ -33,7 +33,7 @@ const Triggers = ({ location }: TriggersProps) => {
       const response = await axios.get(
         `${config.Task2_API}/api/alerts/${location}`
       );
-      setTriggers(response.data); // Set the fetched alerts
+      setTriggers(response.data);
     } catch {
       setError("Failed to fetch alerts");
     } finally {
@@ -76,7 +76,7 @@ const Triggers = ({ location }: TriggersProps) => {
 
       <AddTrigger
         location={location}
-        onTriggerAdded={() => fetchTriggers()} // Callback to re-fetch triggers
+        onTriggerAdded={() => fetchTriggers()}
         email={email}
         setEmail={setEmail}
         temperatureThreshold={temperatureThreshold}

@@ -24,8 +24,8 @@ const EvaluateRule = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null); // Reset error state
-    setResponse(null); // Reset response state
+    setError(null);
+    setResponse(null);
 
     try {
       const data = JSON.stringify({

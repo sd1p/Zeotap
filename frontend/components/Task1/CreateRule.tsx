@@ -19,8 +19,8 @@ const CreateRule = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null); // Reset error state
-    setResponse(null); // Reset response state
+    setError(null);
+    setResponse(null);
 
     const data = JSON.stringify({ rule_string: ruleString });
 

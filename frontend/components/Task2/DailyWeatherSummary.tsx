@@ -9,13 +9,13 @@ interface CurrentWeatherProps {
 }
 
 interface WeatherSummary {
-  city: string; // New field for city name
-  date: string; // Date of the weather summary
-  max_temp: number; // Maximum temperature
-  dominant_condition: string; // Dominant weather condition
-  id: number; // Identifier (if needed)
-  avg_temp: number; // Average temperature
-  min_temp: number; // Minimum temperature
+  city: string;
+  date: string;
+  max_temp: number;
+  dominant_condition: string;
+  id: number;
+  avg_temp: number;
+  min_temp: number;
 }
 
 const DailyWeatherSummary = ({ location }: CurrentWeatherProps) => {
@@ -33,7 +33,7 @@ const DailyWeatherSummary = ({ location }: CurrentWeatherProps) => {
         const response = await axios.get(
           `${config.Task2_API}/api/weather/daily_summary/${location}`
         );
-        setWeatherSummaries(response.data); // Store the fetched weather summaries
+        setWeatherSummaries(response.data);
         setLoading(false);
       } catch {
         setError("Failed to fetch weather data");
@@ -62,7 +62,7 @@ const DailyWeatherSummary = ({ location }: CurrentWeatherProps) => {
       ) : (
         weatherSummaries.map((summary) => (
           <div
-            key={summary.id} // Use unique id for key
+            key={summary.id}
             className="bg-gray-100 p-3 mb-2 rounded-lg shadow-sm"
           >
             <p className="font-semibold">Date: {summary.date}</p>

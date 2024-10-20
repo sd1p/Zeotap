@@ -33,7 +33,7 @@ const AddTrigger = ({
 
     try {
       await axios.post(`${config.Task2_API}/api/alerts/`, data);
-      onTriggerAdded(); // Call the callback to re-fetch triggers
+      onTriggerAdded();
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         setError(error.message);
@@ -75,22 +75,22 @@ const AddTrigger = ({
             id="temperatureAbove"
             type="checkbox"
             checked={temperatureAbove}
-            onChange={() => setTemperatureAbove(!temperatureAbove)} // Toggle state
-            className="toggle-checkbox hidden" // Hide the default checkbox
+            onChange={() => setTemperatureAbove(!temperatureAbove)}
+            className="toggle-checkbox hidden"
           />
           <label
-            htmlFor="temperatureAbove" // Link the label to the checkbox
+            htmlFor="temperatureAbove"
             className={`toggle-label block h-6 rounded-full cursor-pointer ${
               temperatureAbove ? "bg-blue-500" : "bg-gray-300"
             }`}
           ></label>
           <span
-            role="button" // Make it clear this is interactive
-            aria-pressed={temperatureAbove} // Provide accessibility state
-            tabIndex={0} // Make it focusable
-            onClick={() => setTemperatureAbove(!temperatureAbove)} // Toggle state
-            onKeyPress={(e) => {
-              // Allow toggling with keyboard
+            role="button"
+            aria-label="Toggle temperature above"
+            aria-pressed={temperatureAbove ? "true" : "false"}
+            tabIndex={0}
+            onClick={() => setTemperatureAbove(!temperatureAbove)}
+            onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 setTemperatureAbove(!temperatureAbove);
               }

@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Task2 from "./components/Task2";
-import Task1 from "./components/Task1";
+import Task2 from "@/components/Task2";
+import Task1 from "@/components/Task1";
 
 export default function Home() {
   return (

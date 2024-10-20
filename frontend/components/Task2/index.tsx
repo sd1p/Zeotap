@@ -21,7 +21,6 @@ enum Location {
   Hyderabad = "Hyderabad",
 }
 
-// Define the Tab Names
 enum Tab {
   CurrentWeather = "Current Weather",
   DailyWeather = "Daily Weather",
@@ -30,7 +29,7 @@ enum Tab {
 
 const Index = () => {
   const [location, setLocation] = useState<Location>(Location.Delhi);
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.CurrentWeather); // State to manage active tab
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.CurrentWeather);
 
   const handleChangeLocation = (selectedValue: string) => {
     setLocation(selectedValue as Location);

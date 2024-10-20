@@ -1,4 +1,4 @@
-Frontend Deployment - <https://zeotap-n29cr3gvo-sud1ps-projects.vercel.app>
+Frontend Deployment - <https://zeotap-app.vercel.app/>
 
 Task 1 Backend Docs - <https://task1-backend-283967249469.asia-south1.run.app/docs>
 
