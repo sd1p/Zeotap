@@ -1,11 +1,8 @@
-// AddTrigger.tsx
-
-import React, { useState } from "react";
 import axios from "axios";
-
+import config from "@/lib/config";
 interface AddTriggerProps {
-  location: string; // location to fetch alerts
-  onTriggerAdded: () => void; // Callback to re-fetch triggers
+  location: string;
+  onTriggerAdded: () => void;
   email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   temperatureThreshold: number;
@@ -35,10 +32,14 @@ const AddTrigger = ({
     };
 
     try {
-      await axios.post("http://127.0.0.1:8080/api/alerts/", data);
+      await axios.post(`${config.Task2_API}/api/alerts/`, data);
       onTriggerAdded(); // Call the callback to re-fetch triggers
-    } catch (err) {
-      setError("Failed to create trigger");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        setError(error.message);
+      } else {
+        setError("Failed to create trigger");
+      }
     }
   };
 

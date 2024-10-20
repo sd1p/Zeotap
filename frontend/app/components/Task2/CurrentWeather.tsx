@@ -27,11 +27,10 @@ const CurrentWeather = ({ location }: CurrentWeatherProps) => {
     const fetchWeatherData = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8080/api/weather/current/${location}`
+          `${config.Task2_API}/api/weather/current/${location}`
         );
 
         const data = response.data;
-        console.log(config);
 
         setWeatherData({
           feels_like: data.feels_like,
@@ -41,8 +40,7 @@ const CurrentWeather = ({ location }: CurrentWeatherProps) => {
           city: data.city,
           humidity: data.humidity,
         });
-      } catch (err) {
-        console.log(err);
+      } catch {
         setError("Failed to fetch weather data.");
       }
     };

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import config from "@/lib/config";
 
 interface CurrentWeatherProps {
   location: string;
@@ -30,11 +31,11 @@ const DailyWeatherSummary = ({ location }: CurrentWeatherProps) => {
       setError(null);
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8080/api/weather/daily_summary/${location}`
+          `${config.Task2_API}/api/weather/daily_summary/${location}`
         );
         setWeatherSummaries(response.data); // Store the fetched weather summaries
         setLoading(false);
-      } catch (err) {
+      } catch {
         setError("Failed to fetch weather data");
         setLoading(false);
       }

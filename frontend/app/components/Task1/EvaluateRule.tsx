@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import configAPI from "@/lib/config";
 
 interface ApiResponse {
   result?: boolean;
@@ -35,7 +36,7 @@ const EvaluateRule = () => {
       const config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: "http://127.0.0.1:8000/api/evaluate_rule",
+        url: `${configAPI.Task1_API}/api/evaluate_rule`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -44,8 +45,12 @@ const EvaluateRule = () => {
 
       const response = await axios.request(config);
       setResponse(response.data);
-    } catch (error: any) {
-      setError(error.message || "Failed to evaluate rule.");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        setError(error.message);
+      } else {
+        setError("Failed to evaluate rule.");
+      }
     }
   };
 

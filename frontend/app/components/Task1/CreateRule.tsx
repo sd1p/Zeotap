@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import configAPI from "@/lib/config";
 
 interface ApiResponse {
   Node?: object;
@@ -26,7 +27,7 @@ const CreateRule = () => {
     const config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://127.0.0.1:8000/api/create_rule",
+      url: `${configAPI.Task1_API}/api/create_rule`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -36,8 +37,12 @@ const CreateRule = () => {
     try {
       const response = await axios.request(config);
       setResponse(response.data);
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 

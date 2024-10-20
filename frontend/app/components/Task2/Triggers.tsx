@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AddTrigger from "./AddTRigger"; // Import the new AddTrigger component
+import config from "@/lib/config";
 
 interface Trigger {
   id: number;
@@ -30,12 +31,11 @@ const Triggers = ({ location }: TriggersProps) => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8080/api/alerts/${location}`
+        `${config.Task2_API}/api/alerts/${location}`
       );
       setTriggers(response.data); // Set the fetched alerts
-    } catch (err) {
+    } catch {
       setError("Failed to fetch alerts");
-      console.log(err);
     } finally {
       setLoading(false);
     }

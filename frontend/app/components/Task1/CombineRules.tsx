@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import configAPI from "@/lib/config";
 
 interface ApiResponse {
   Node?: object;
@@ -37,7 +38,7 @@ const CombineRules = () => {
     const config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://127.0.0.1:8000/api/combine_rules",
+      url: `${configAPI.Task1_API}/api/combine_rules`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -46,11 +47,13 @@ const CombineRules = () => {
 
     try {
       const response = await axios.request(config);
-      console.log("API Response:", response.data); // Log the response
       setResponse(response.data);
-    } catch (error: any) {
-      console.log("API Error:", error); // Log the error
-      setError(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 

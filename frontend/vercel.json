@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_Task1_API": "https://task1-backend-283967249469.asia-south1.run.app",
+    "NEXT_PUBLIC_Task2_API": "https://task2-backend-283967249469.asia-south1.run.app"
+  }
+}
